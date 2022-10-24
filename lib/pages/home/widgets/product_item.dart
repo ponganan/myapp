@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/constants/api.dart';
+import 'package:myapp/models/product.dart';
 
 class ProductItem extends StatelessWidget {
   final double maxHeight;
-  const ProductItem(this.maxHeight, {super.key});
+  final Product product;
+  const ProductItem(this.maxHeight, this.product, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +21,19 @@ class ProductItem extends StatelessWidget {
   }
 
   Image _buildImage() {
-    final height = maxHeight * 0.8;
-    final productImage =
-        'https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/MA_00824519_xiqkt7_abbewy.jpg';
+    final height = maxHeight * 0.7;
+
+    final productImage = product.image;
     return Image.network(
-      productImage,
+      '${API.IMAGE_URL}/$productImage',
       height: height,
     );
   }
 
   Column _buildInfo() => Column(
         children: [
-          const Text(
-            'There are two species of hippos — the large/common hippo and the smaller relative, the pygmy hippo. Hippos are the third-largest living land mammal, after elephants and white rhinos. Despite their large and bulky appearance, they have adaptations to their semi-aquatic environments allowing them to move swiftly on both water and land. Their feet have four-webbed toes that splay out to distribute weight evenly and therefore adequately support them on land, and their short legs provide powerful propulsion through the water. The pygmy hippos digits are more spread out and have less webbing and, proportionally, their legs are longer relative to its body size. ',
+          Text(
+            product.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),

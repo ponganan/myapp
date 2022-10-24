@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/models/post.dart';
+import 'package:myapp/models/product.dart';
 import 'package:myapp/pages/home/widgets/product_item.dart';
 import 'package:myapp/services/network_service.dart';
 
-class Stock extends StatelessWidget {
+class Stock extends StatefulWidget {
   const Stock({Key? key}) : super(key: key);
 
   @override
+  State<Stock> createState() => _StockState();
+}
+
+class _StockState extends State<Stock> {
+  @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Post>>(
-      future: NetworkService().fetchPosts(0),
+    return FutureBuilder<List<Product>>(
+      future: NetworkService().getAllProduct(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<Post>? post = snapshot.data;
-          if (post == null || post.isEmpty) {
+          List<Product>? product = snapshot.data;
+          if (product == null || product.isEmpty) {
             return Center(
               child: Text('No Data'),
             );
           }
-          return _buildProductGridView(post);
+          return RefreshIndicator(
+              onRefresh: () async {
+                setState(() {});
+              },
+              child: _buildProductGridView(product));
         }
         if (snapshot.hasError) {
           return Center(
@@ -32,7 +42,7 @@ class Stock extends StatelessWidget {
     );
   }
 
-  GridView _buildProductGridView(List<Post> post) {
+  GridView _buildProductGridView(List<Product> product) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -42,10 +52,10 @@ class Stock extends StatelessWidget {
       ),
       itemBuilder: (context, index) => LayoutBuilder(
         builder: (context, BoxConstraints constraints) {
-          return ProductItem(constraints.maxHeight);
+          return ProductItem(constraints.maxHeight, product[index]);
         },
       ),
-      itemCount: post.length,
+      itemCount: product.length,
     );
   }
 }
