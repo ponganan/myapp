@@ -20,7 +20,7 @@ class _StockState extends State<Stock> {
         if (snapshot.hasData) {
           List<Product>? product = snapshot.data;
           if (product == null || product.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No Data'),
             );
           }
