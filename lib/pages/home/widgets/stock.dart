@@ -14,6 +14,16 @@ class Stock extends StatefulWidget {
 class _StockState extends State<Stock> {
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: _buildNetwork(),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  FutureBuilder<List<Product>> _buildNetwork() {
     return FutureBuilder<List<Product>>(
       future: NetworkService().getAllProduct(),
       builder: (context, snapshot) {
