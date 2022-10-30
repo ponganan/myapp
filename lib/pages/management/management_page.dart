@@ -23,7 +23,7 @@ class _ManagementPageState extends State<ManagementPage> {
           title: Text(_isEdit ? 'Edit Product' : 'Create Product'),
         ),
         body: FlutterLogo(
-          size: 150,
+          size: 140,
         ));
   }
 }
