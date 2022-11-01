@@ -1,5 +1,5 @@
 class API {
-  static const String BASE_URL = 'http://192.168.1.3:1150';
+  static const String BASE_URL = 'https://www.jiwaree888.com';
   static const String IMAGE_URL = '$BASE_URL/images';
   static const String PRODUCT = '/products';
 }
