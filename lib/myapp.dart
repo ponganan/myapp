@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/home/widgets/stock.dart';
 import 'package:myapp/services/network_service.dart';
+import 'package:myapp/config/route.dart' as custom_route;
 
 import 'models/post.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: custom_route.Route.getAll(),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('PS SHOP'),

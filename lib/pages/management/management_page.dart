@@ -21,6 +21,12 @@ class _ManagementPageState extends State<ManagementPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(_isEdit ? 'Edit Product' : 'Create Product'),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+            )
+          ],
         ),
         body: FlutterLogo(
           size: 140,
